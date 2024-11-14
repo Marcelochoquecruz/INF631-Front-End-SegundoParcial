@@ -1,3 +1,11 @@
+/* src/index.css */
+
+/* Importando las directivas de Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globales para :root */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,7 +13,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #242424; /* Color de fondo predeterminado */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,6 +21,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Estilos para enlaces */
 a {
   font-weight: 500;
   color: #646cff;
@@ -22,6 +31,7 @@ a:hover {
   color: #535bf2;
 }
 
+/* Estilos para el cuerpo */
 body {
   margin: 0;
   display: flex;
@@ -30,11 +40,13 @@ body {
   min-height: 100vh;
 }
 
+/* Título h1 */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+/* Estilos para botones */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -54,15 +66,23 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Modo oscuro y claro con Tailwind */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #ffffff; /* Fondo claro */
   }
   a:hover {
-    color: #747bff;
+    color: #747bff; /* Color de hover para enlaces en modo claro */
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Fondo de botón en modo claro */
   }
 }
+
+/* Usar clases utilitarias de Tailwind para fondos, texto y bordes */
+body {
+  @apply bg-gray-800 text-white;
+}
+
+/* Puedes personalizar aún más con clases de Tailwind */
