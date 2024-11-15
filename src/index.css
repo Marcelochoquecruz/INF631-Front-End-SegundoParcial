@@ -82,7 +82,10 @@ button:focus-visible {
 
 /* Usar clases utilitarias de Tailwind para fondos, texto y bordes */
 body {
-  @apply bg-gray-800 text-white;
+  background-image: url("/src/assets/fondo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Puedes personalizar aún más con clases de Tailwind */

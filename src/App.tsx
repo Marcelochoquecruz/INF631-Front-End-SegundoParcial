@@ -1,15 +1,17 @@
-import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Head from './components/head/Head';
+import NavBar from './components/head/NavBar';
 import './App.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <div className="app-container">
-      <Head />
-      <main className="p-10">
-        <p>Aquí es donde empieza tu majestuosa aplicación...</p>
-      </main>
-    </div>
+    <Router>
+      <div>
+        <Head />
+        <NavBar />
+        {/* Aquí irá el resto de tus rutas/contenido */}
+      </div>
+    </Router>
   );
 };
 
