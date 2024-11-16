@@ -52,7 +52,7 @@ const Carrousel = () => {
           alt="Carousel Image"
           className="w-full h-full object-cover"
         />
-        <div className="absolute right-10 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 dark:bg-opacity-90 text-white p-6 rounded-lg max-w-lg">
+        <div className="absolute right-20 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 dark:bg-opacity-90 text-white p-6 rounded-lg max-w-lg">
           <h3 className="text-3xl font-bold text-yellow-500">{data[index].nivel}</h3>
           <h3 className="text-2xl font-bold text-white opacity-80">{data[index].descripcion}</h3>
         </div>
