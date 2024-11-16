@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { GraduationCap, BookOpen, Brain, Lightbulb } from 'lucide-react';
+import { ThemeContext } from './ThemeContext'; // Importar el contexto del tema
 
 const Menu = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const themeContext = useContext(ThemeContext); // Usar el contexto del tema
 
   const menuItems = [
     {
@@ -32,19 +33,9 @@ const Menu = () => {
     },
   ];
 
-  // Detectar preferencia de modo oscuro del sistema
-  useEffect(() => {
-    const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(darkModePreference.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-    darkModePreference.addEventListener('change', handler);
-    return () => darkModePreference.removeEventListener('change', handler);
-  }, []);
-
   return (
     <section className={`p-6 transition-colors duration-300 ${
-      isDarkMode ? 'bg-slate-900/95 text-white' : 'bg-slate-50/95 text-slate-800'
+      themeContext?.theme === 'dark' ? 'bg-slate-900/95 text-white' : 'bg-slate-50/95 text-slate-800'
     }`}>
       <ul className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 transition-all duration-300">
         {menuItems.map((item, index) => {
@@ -59,7 +50,7 @@ const Menu = () => {
               <a
                 href="#"
                 className={`flex flex-col h-full items-center p-6 rounded-xl transition-transform duration-300
-                  ${isDarkMode ? 
+                  ${themeContext?.theme === 'dark' ? 
                     'bg-slate-800/50 hover:bg-slate-800/90' : 
                     'bg-white/50 hover:bg-white/90'
                   }
@@ -75,10 +66,10 @@ const Menu = () => {
                 <div className={`relative flex items-center justify-center w-16 h-16 mb-4 rounded-2xl 
                   bg-gradient-to-br ${item.gradient} p-0.5 transition-transform duration-300 group-hover:scale-110`}>
                   <div className={`flex items-center justify-center w-full h-full rounded-xl ${
-                    isDarkMode ? 'bg-slate-900' : 'bg-white'
+                    themeContext?.theme === 'dark' ? 'bg-slate-900' : 'bg-white'
                   }`}>
                     <Icon size={28} className={`transition-colors duration-300 ${
-                      hoveredIndex === index ? 'text-current' : isDarkMode ? 'text-white' : 'text-slate-700'
+                      hoveredIndex === index ? 'text-current' : themeContext?.theme === 'dark' ? 'text-white' : 'text-slate-700'
                     }`} />
                   </div>
                 </div>

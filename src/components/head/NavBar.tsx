@@ -35,7 +35,7 @@ const NavMenu = () => {
   ];
 
   const gradients = [
-    'from-pink-500 to-rose-500',
+    'from-gray-700 to-gray-600',
     'from-blue-500 to-cyan-500',
     'from-green-500 to-emerald-500',
     'from-violet-500 to-purple-500',
