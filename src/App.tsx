@@ -1,7 +1,9 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import Head from './components/head/Head';
-import NavBar from './components/head/NavBar';
-import './App.css';
+//import React from 'react'; // Importar React siempre es un buen comienzo
+import { BrowserRouter as Router } from 'react-router-dom'; // El enrutador principal
+import Head from './components/head/Head'; // Importar tu componente Head
+import NavBar from './components/head/NavBar'; // Importar tu NavBar
+import './App.css'; // Importar los estilos CSS para tu App
+import Carrousel from './components/slider';
 
 const App = () => {
   return (
@@ -11,6 +13,7 @@ const App = () => {
         <NavBar />
         {/* Aquí irá el resto de tus rutas/contenido */}
       </div>
+      <Carrousel />
     </Router>
   );
 };
