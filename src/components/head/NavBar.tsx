@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaHome,
   FaUniversity,
@@ -12,18 +12,17 @@ import {
 
 const NavMenu = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const location = useLocation();
 
-  // Detectar scroll para cambiar estilos
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Array de items del menú
   const menuItems = [
     { path: '/', label: 'Principal', icon: FaHome },
     { path: '/institucional', label: 'Institucional', icon: FaUniversity },
@@ -33,81 +32,135 @@ const NavMenu = () => {
     { path: '/contacto', label: 'Contacto', icon: FaEnvelope }
   ];
 
-  // Array de colores para los íconos
-  const iconColors = [
-    'text-red-500',
-    'text-blue-500',
-    'text-green-500',
-    'text-yellow-500',
-    'text-purple-500',
-    'text-orange-500'
+  const gradients = [
+    'from-pink-500 to-rose-500',
+    'from-blue-500 to-cyan-500',
+    'from-green-500 to-emerald-500',
+    'from-violet-500 to-purple-500',
+    'from-yellow-500 to-orange-500',
+    'from-teal-500 to-cyan-500'
   ];
 
   return (
-    <nav className={`
-      sticky top-0 z-50
-      transition-all duration-300 ease-in-out
-      ${isScrolled
-        ? 'bg-[#f7fbfd] dark:bg-[#293f3d] backdrop-blur-md shadow-lg'
-        : 'bg-[#f7fbfd]/90 dark:bg-[#293f3d]/90 backdrop-blur-sm'
-      }
-    `}>
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`
+        fixed top-24 left-0 right-0 z-40
+        transition-all duration-500 ease-in-out
+        ${isScrolled 
+          ? 'bg-white/80 dark:bg-slate-900/80 shadow-lg backdrop-blur-lg' 
+          : 'bg-white/50 dark:bg-slate-900/50 backdrop-blur-md'
+        }
+      `}
+    >
+      {/* Efecto de luces de neón en el borde superior */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-gradient-x" />
+
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-center">
-          <ul className="flex flex-wrap justify-center space-x-2 md:space-x-3 py-2">
+          <motion.ul 
+            className="flex flex-wrap justify-center gap-2 py-3"
+            layout
+          >
             {menuItems.map((item, index) => {
               const isActive = location.pathname === item.path;
               const Icon = item.icon;
-              const iconColor = iconColors[index % iconColors.length]; // Distribuye colores en un ciclo
+              const gradient = gradients[index % gradients.length];
 
               return (
-                <li key={item.path}>
+                <motion.li
+                  key={item.path}
+                  
+                  onHoverEnd={() => setHoveredIndex(null)}
+                  className="relative"
+                >
                   <Link
                     to={item.path}
                     className={`
-                      relative px-4 py-2 rounded-lg
-                      flex items-center space-x-2
+                      relative overflow-hidden
+                      px-4 py-2 rounded-xl
+                      flex items-center gap-2
                       transition-all duration-300
-                      hover:bg-[#b0d2d1] dark:hover:bg-[#45706d]
-                      ${isActive
-                        ? 'text-[#5c6c6c] dark:text-[#84b0a0]'
-                        : 'text-[#545454] dark:text-[#c1d7d5]'
+                      ${isActive 
+                        ? 'text-white font-semibold scale-105' 
+                        : 'text-slate-700 dark:text-slate-200'
                       }
+                      hover:scale-105
                     `}
                   >
-                    <Icon className={`
-                      w-5 h-5 transition-transform duration-300 ${iconColor}
-                      ${isActive ? 'scale-110' : 'scale-100'}
+                    {/* Fondo con gradiente */}
+                    <div className={`
+                      absolute inset-0 opacity-${isActive ? '100' : '0'}
+                      bg-gradient-to-r ${gradient}
+                      transition-opacity duration-300
+                      ${hoveredIndex === index ? 'opacity-100' : ''}
                     `} />
-                    <span className="font-medium whitespace-nowrap">
+
+                    {/* Efecto de brillo */}
+                    <div className={`
+                      absolute inset-0 opacity-0
+                      bg-gradient-to-r from-white via-white/0 to-white/0
+                      transition-all duration-1000
+                      ${hoveredIndex === index ? 'opacity-20 translate-x-full' : ''}
+                    `} />
+
+                    {/* Contenido */}
+                    <div className="relative">
+                      <Icon className={`
+                        w-5 h-5 transition-all duration-300
+                        ${isActive || hoveredIndex === index ? 'text-white' : `bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}
+                      `} />
+                    </div>
+
+                    <span className="relative font-medium whitespace-nowrap">
                       {item.label}
                     </span>
 
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeIndicator"
-                        className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#5c6c6c] dark:bg-[#84b0a0]"
-                        initial={false}
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
+                    {/* Indicador activo */}
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeIndicator"
+                          className={`
+                            absolute -bottom-1 left-0 right-0 h-1
+                            bg-gradient-to-r ${gradient}
+                            rounded-full
+                          `}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.8 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 30
+                          }}
+                        />
+                      )}
+                    </AnimatePresence>
                   </Link>
-                </li>
+
+                  {/* Efecto de resplandor estático al hover */}
+                  <div
+                    className={`
+                      absolute inset-0 -z-10
+                      bg-gradient-to-r ${gradient}
+                      rounded-xl blur-xl
+                      transition-opacity duration-300
+                      opacity-0
+                      ${hoveredIndex === index ? 'opacity-30' : ''}
+                    `}
+                  />
+                </motion.li>
               );
             })}
-          </ul>
+          </motion.ul>
         </div>
       </div>
 
-      {/* Sombra gradient superior cuando se hace scroll */}
-      <div className={`
-        absolute inset-x-0 -top-6 h-6
-        bg-gradient-to-b from-transparent to-[#f7fbfd] dark:to-[#293f3d]
-        pointer-events-none
-        transition-opacity duration-300
-        ${isScrolled ? 'opacity-100' : 'opacity-0'}
-      `} />
-    </nav>
+      {/* Efecto de sombra inferior */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent" />
+    </motion.nav>
   );
 };
 
