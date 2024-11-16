@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GraduationCap, BookOpen, Brain, Lightbulb, Sun, Moon } from 'lucide-react';
+import { GraduationCap, BookOpen, Brain, Lightbulb } from 'lucide-react';
 
 const Menu = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -43,20 +43,10 @@ const Menu = () => {
   }, []);
 
   return (
-    <section className={`p-4 transition-colors duration-300 ${
-      isDarkMode ? 'bg-slate-900/95' : 'bg-slate-50/95'
+    <section className={`p-6 transition-colors duration-300 ${
+      isDarkMode ? 'bg-slate-900/95 text-white' : 'bg-slate-50/95 text-slate-800'
     }`}>
-      {/* Theme Toggle Button */}
-      <button
-        onClick={() => setIsDarkMode(!isDarkMode)}
-        className={`fixed top-4 right-4 p-2 rounded-full transition-all duration-300 ${
-          isDarkMode ? 'bg-slate-800 text-yellow-400' : 'bg-slate-200 text-slate-700'
-        } hover:scale-110`}
-      >
-        {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
-      </button>
-
-      <ul className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 transition-all duration-300">
+      <ul className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 transition-all duration-300">
         {menuItems.map((item, index) => {
           const Icon = item.icon;
           return (
@@ -68,25 +58,22 @@ const Menu = () => {
             >
               <a
                 href="#"
-                className={`flex flex-col h-full items-center p-6 rounded-xl transition-all duration-500
+                className={`flex flex-col h-full items-center p-6 rounded-xl transition-transform duration-300
                   ${isDarkMode ? 
-                    'bg-slate-800/50 hover:bg-slate-800/90 text-white' : 
-                    'bg-white/50 hover:bg-white/90 text-slate-800'
+                    'bg-slate-800/50 hover:bg-slate-800/90' : 
+                    'bg-white/50 hover:bg-white/90'
                   }
                   backdrop-blur-md border-2 border-transparent
-                  hover:border-2 hover:border-opacity-50
-                  ${hoveredIndex === index ? 'scale-102' : 'scale-100'}
-                  hover:shadow-2xl hover:shadow-current/10
-                  transform transition-all duration-300 ease-out`}
+                  hover:scale-105 hover:border-opacity-50
+                  hover:shadow-2xl hover:shadow-current/10 transform`}
               >
                 {/* Gradient line animation */}
                 <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.gradient}
-                  transform origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100`} />
+                  transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100`} />
                 
                 {/* Icon container with gradient background */}
                 <div className={`relative flex items-center justify-center w-16 h-16 mb-4 rounded-2xl 
-                  bg-gradient-to-br ${item.gradient} p-0.5 transform transition-transform duration-500
-                  group-hover:rotate-6 group-hover:scale-110`}>
+                  bg-gradient-to-br ${item.gradient} p-0.5 transition-transform duration-300 group-hover:scale-110`}>
                   <div className={`flex items-center justify-center w-full h-full rounded-xl ${
                     isDarkMode ? 'bg-slate-900' : 'bg-white'
                   }`}>
@@ -96,20 +83,18 @@ const Menu = () => {
                   </div>
                 </div>
                 
-                <h1 className={`text-xl font-bold text-center mb-2 transition-colors duration-300
-                  ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
+                <h1 className="text-xl font-bold text-center mb-2 transition-colors duration-300">
                   {item.nivel}
                 </h1>
                 
-                <h2 className={`text-sm font-medium text-center transition-colors duration-300
-                  ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                <h2 className="text-sm font-medium text-center transition-colors duration-300">
                   {item.descripcion}
                 </h2>
 
                 {/* Decorative corner gradient */}
                 <div className={`absolute bottom-0 right-0 w-24 h-24 rounded-full -mr-12 -mb-12 
                   bg-gradient-to-br ${item.gradient} opacity-10 transform transition-transform 
-                  duration-500 ease-out scale-0 group-hover:scale-100`} />
+                  duration-300 scale-0 group-hover:scale-100`} />
               </a>
             </li>
           );
