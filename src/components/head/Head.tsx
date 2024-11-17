@@ -1,30 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { ThemeContext } from '../ThemeContext';
 
 const Head = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const themeContext = useContext(ThemeContext);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <header className={`
-      sticky top-0 z-50
-      transition-all duration-300 ease-in-out
-      ${isScrolled
-        ? 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-md shadow-lg'
-        : 'bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm'
-      }
-    `}>
+    <header className="bg-white dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between py-2"> {/* Menor espacio vertical */}
+        <div className="flex items-center justify-between py-2">
           
           {/* Logo y títulos */}
           <div className="flex items-center space-x-8 group w-3/4">
@@ -36,7 +20,7 @@ const Head = () => {
                        drop-shadow-[4px_4px_8px_rgba(59,130,246,0.6)]"
             />
             
-            <div className="space-y-1 flex-grow"> {/* Menor espacio entre títulos */}
+            <div className="space-y-1 flex-grow">
               <h1 className="text-4xl font-bold text-gray-700 dark:text-gray-200 
                            tracking-tight drop-shadow-[2px_2px_4px_rgba(59,130,246,0.6)]">
                 COLEGIO ALTERNATIVO
@@ -51,15 +35,13 @@ const Head = () => {
           {/* Botón de tema */}
           <button
             onClick={themeContext?.toggleTheme}
-            className={`
-              p-1 rounded-full
-              bg-gray-100 dark:bg-gray-700
-              hover:bg-gray-200 dark:hover:bg-gray-600
-              transform transition-all duration-300
-              hover:scale-110 active:scale-95
-              focus:outline-none focus:ring-2 focus:ring-blue-300
-              shadow-md 
-            `}
+            className="p-1 rounded-full
+                     bg-gray-100 dark:bg-gray-700
+                     hover:bg-gray-200 dark:hover:bg-gray-600
+                     transform transition-all duration-300
+                     hover:scale-110 active:scale-95
+                     focus:outline-none focus:ring-2 focus:ring-blue-300
+                     shadow-md"
             aria-label="Cambiar tema"
           >
             {themeContext?.theme === 'dark' ? (
@@ -70,15 +52,6 @@ const Head = () => {
           </button>
         </div>
       </div>
-
-      {/* Sombra gradient superior cuando se hace scroll */}
-      <div className={`
-        absolute inset-x-0 -top-4 h-4 {/* Más pequeño también */}
-        bg-gradient-to-b from-transparent to-white/50 dark:to-gray-800/50
-        pointer-events-none
-        transition-opacity duration-300
-        ${isScrolled ? 'opacity-100' : 'opacity-0'}
-      `} />
     </header>
   );
 };

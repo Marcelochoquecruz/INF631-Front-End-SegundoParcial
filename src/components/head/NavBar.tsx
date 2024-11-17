@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -10,20 +10,9 @@ import {
   FaEnvelope
 } from 'react-icons/fa';
 
-const NavMenu = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+const NavBar = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const location = useLocation();
-  const [navTop, setNavTop] = useState(24);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-      setNavTop(window.scrollY > 100 ? 0 : 24);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const menuItems = [
     { path: '/', label: 'Principal', icon: FaHome },
@@ -36,7 +25,7 @@ const NavMenu = () => {
 
   const gradients = [
     'from-gray-700 to-gray-600',
-    'from-blue-500 to-cyan-500',
+    'from-blue-500 to-cyan-500', 
     'from-green-500 to-emerald-500',
     'from-violet-500 to-purple-500',
     'from-yellow-500 to-orange-500',
@@ -45,16 +34,9 @@ const NavMenu = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`
-        fixed top-${navTop} left-0 right-0 z-40
-        transition-all duration-500 ease-in-out
-        ${isScrolled
-          ? 'bg-white/80 dark:bg-slate-900/80 shadow-lg backdrop-blur-lg'
-          : 'bg-white/50 dark:bg-slate-900/50 backdrop-blur-md'
-        }
-      `}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="sticky top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-lg z-30"
     >
       {/* Efecto de luces de neón en el borde superior */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-gradient-x" />
@@ -68,7 +50,12 @@ const NavMenu = () => {
               const gradient = gradients[index % gradients.length];
 
               return (
-                <motion.li key={item.path} onHoverEnd={() => setHoveredIndex(null)} className="relative">
+                <motion.li 
+                  key={item.path} 
+                  onHoverStart={() => setHoveredIndex(index)}
+                  onHoverEnd={() => setHoveredIndex(null)} 
+                  className="relative"
+                >
                   <Link
                     to={item.path}
                     className={`
@@ -83,20 +70,20 @@ const NavMenu = () => {
                     {/* Fondo con gradiente */}
                     <div
                       className={`
-                        absolute inset-0 opacity-${isActive ? '100' : '0'}
+                        absolute inset-0
                         bg-gradient-to-r ${gradient}
                         transition-opacity duration-300
-                        ${hoveredIndex === index ? 'opacity-100' : ''}
+                        ${isActive || hoveredIndex === index ? 'opacity-100' : 'opacity-0'}
                       `}
                     />
 
                     {/* Efecto de brillo */}
                     <div
                       className={`
-                        absolute inset-0 opacity-0
+                        absolute inset-0
                         bg-gradient-to-r from-white via-white/0 to-white/0
                         transition-all duration-1000
-                        ${hoveredIndex === index ? 'opacity-20 translate-x-full' : ''}
+                        ${hoveredIndex === index ? 'opacity-20 translate-x-full' : 'opacity-0'}
                       `}
                     />
 
@@ -155,4 +142,4 @@ const NavMenu = () => {
   );
 };
 
-export default NavMenu;
+export default NavBar;
