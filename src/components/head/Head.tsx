@@ -6,7 +6,7 @@ const Head = () => {
   const themeContext = useContext(ThemeContext);
 
   return (
-    <header className="bg-white dark:bg-gray-800">
+    <header className="bg-transparent">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between py-2">
           
@@ -21,12 +21,14 @@ const Head = () => {
             />
             
             <div className="space-y-1 flex-grow">
-              <h1 className="text-4xl font-bold text-gray-700 dark:text-gray-200 
-                           tracking-tight drop-shadow-[2px_2px_4px_rgba(59,130,246,0.6)]">
+              <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 
+                           tracking-tight drop-shadow-[2px_2px_4px_rgba(59,130,246,0.6)]
+                           select-none">
                 COLEGIO ALTERNATIVO
               </h1>
-              <h2 className="text-3xl font-semibold text-gray-600 dark:text-gray-300 
-                           tracking-wide drop-shadow-[2px_2px_4px_rgba(59,130,246,0.6)]">
+              <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 
+                           tracking-wide drop-shadow-[2px_2px_4px_rgba(59,130,246,0.6)]
+                           select-none">
                 Educación con Valores
               </h2>
             </div>
@@ -36,12 +38,12 @@ const Head = () => {
           <button
             onClick={themeContext?.toggleTheme}
             className="p-1 rounded-full
-                     bg-gray-100 dark:bg-gray-700
-                     hover:bg-gray-200 dark:hover:bg-gray-600
+                     bg-white/80 dark:bg-gray-800/80
+                     hover:bg-white dark:hover:bg-gray-700
                      transform transition-all duration-300
                      hover:scale-110 active:scale-95
                      focus:outline-none focus:ring-2 focus:ring-blue-300
-                     shadow-md"
+                     shadow-md backdrop-blur-sm"
             aria-label="Cambiar tema"
           >
             {themeContext?.theme === 'dark' ? (

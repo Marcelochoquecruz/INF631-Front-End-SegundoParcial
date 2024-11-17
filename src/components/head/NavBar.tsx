@@ -36,7 +36,7 @@ const NavBar = () => {
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="sticky top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-lg z-30"
+      className="sticky top-0 w-full bg-transparent backdrop-blur-lg shadow-lg z-30"
     >
       {/* Efecto de luces de neón en el borde superior */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-gradient-x" />
