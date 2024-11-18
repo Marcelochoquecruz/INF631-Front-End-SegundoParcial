@@ -13,7 +13,7 @@ const App = () => {
           backgroundImage: 'url("/src/assets/fondo.jpg")'
         }}>
         {/* Overlay para mejorar la legibilidad del contenido */}
-        <div className="absolute inset-0 bg-white/70 dark:bg-slate-900/80 backdrop-blur-[2px]" />
+        <div  />
         
         <Router>
           <div className="min-h-screen">

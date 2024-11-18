@@ -33,3 +33,13 @@ html, body, #root {
   animation: gradient-x 15s ease infinite;
   background-size: 200% 200%;
 }
+/* styles.css */
+.dark-footer {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.light-footer {
+  background-color: #ffffff;
+  color: #121212;
+}
