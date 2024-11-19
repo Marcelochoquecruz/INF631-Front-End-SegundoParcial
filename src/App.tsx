@@ -5,6 +5,7 @@ import './App.css';
 import { ThemeProvider } from './components/ThemeContext';
 import AppRoutes from './routes'; // Importa las rutas
 
+
 const App = () => {
   return (
     <ThemeProvider>
@@ -20,7 +21,7 @@ const App = () => {
             <Head />
             <NavBar />
             {/* Aquí van las rutas que cambiarán el contenido según la navegación */}
-            <main>
+             <main>
               {/* Las rutas definidas en AppRoutes se manejarán aquí */}
               <AppRoutes />
             </main>

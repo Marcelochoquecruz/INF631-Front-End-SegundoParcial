@@ -39,7 +39,8 @@ const Menu = () => {
     : themeContext?.theme === 'dark' ? 'text-white' : 'text-slate-700';
 
   return (
-    <section >
+    <div className='bg-white'>
+    <section>
   
       <ul className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 transition-all duration-300">
         {menuItems.map((item, index) => {
@@ -90,7 +91,7 @@ const Menu = () => {
         })}
       </ul>
     </section>
+</div>
   );
 };
-
 export default Menu;

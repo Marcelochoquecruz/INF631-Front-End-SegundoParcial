@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 // Importa tus páginas
 import Principal from '../pages/Principal';
 import Institucional from '../pages/Institucional';
-import Fotos from '../pages/Fotos';
+import Fotos from '../pages/GaleriaFotografica';
 import Inscripciones from '../pages/Inscripciones';
 import Cuotas from '../pages/Cuotas';
 import Contacto from '../pages/Contacto';

@@ -21,12 +21,12 @@ const Head = () => {
             />
             
             <div className="space-y-1 flex-grow">
-              <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 
+              <h1 className="text-4xl font-bold text-gray-200 dark:text-gray-800 
                            tracking-tight drop-shadow-[2px_2px_4px_rgba(59,130,246,0.6)]
                            select-none">
                 COLEGIO ALTERNATIVO
               </h1>
-              <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 
+              <h2 className="text-3xl font-semibold text-gray-200 dark:text-gray-800 
                            tracking-wide drop-shadow-[2px_2px_4px_rgba(59,130,246,0.6)]
                            select-none">
                 Educación con Valores

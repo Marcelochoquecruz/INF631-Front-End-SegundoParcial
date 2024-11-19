@@ -18,8 +18,8 @@ const NavBar = () => {
     { path: '/', label: 'Principal', icon: FaHome },
     { path: '/institucional', label: 'Institucional', icon: FaUniversity },
     { path: '/fotos', label: 'Fotos', icon: FaImages },
-    { path: '/inscripciones', label: 'Inscripciones 2021', icon: FaUserGraduate },
-    { path: '/cuotas', label: 'Cuotas 2021', icon: FaMoneyBillWave },
+    { path: '/inscripciones', label: 'Inscripciones 2024', icon: FaUserGraduate },
+    { path: '/cuotas', label: 'Cuotas 2024', icon: FaMoneyBillWave },
     { path: '/contacto', label: 'Contacto', icon: FaEnvelope }
   ];
 
@@ -63,7 +63,7 @@ const NavBar = () => {
                       px-4 py-2 rounded-xl
                       flex items-center gap-2
                       transition-all duration-300
-                      ${isActive ? 'text-white font-semibold scale-105' : 'text-slate-700 dark:text-slate-200'}
+                      ${isActive ? 'text-white font-semibold scale-105' : 'text-blue-400 dark:text-slate-200'}
                       hover:scale-105
                     `}
                   >
